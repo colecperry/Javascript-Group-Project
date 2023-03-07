@@ -1,6 +1,8 @@
 //fetch api key for 10 cocktails
 const cocktailURL =
   "https://www.thecocktaildb.com/api/json/v2/9973533/latest.php";
+
+  
 const fetchAll = () => {
   fetch(`${cocktailURL}`)
     .then((resp) => resp.json())
