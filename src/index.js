@@ -1,31 +1,29 @@
-//fetch api key for 10 cocktails
-const cocktailURL =
-  "https://www.thecocktaildb.com/api/json/v2/9973533/latest.php";
-
-  
+const cocktailURL = "https://www.thecocktaildb.com/api/json/v2/9973533/latest.php";
 const fetchAll = () => {
   fetch(`${cocktailURL}`)
-    .then((resp) => resp.json())
+    .then((response) => response.json())
     .then((cocktails) => {
-      cocktails.forEach((cocktailObj) =>{
-        renderCocktails(cocktails);
+      console.log(cocktails.drinks);
+      const cocktails1 = cocktails.drinks;
+      cocktails1.forEach((cocktail) => {
+          console.log(cocktail)
+          renderCocktails(cocktail);
       });
     });
 };
 
-/*fetch("https://www.thecocktaildb.com/api/json/v2/9973533/latest.php")
-  .then((resp) => resp.json())
-  .then((cocktails) => renderCocktails(cocktails));
-
-// render cocktail names to the top of the page
-
-/*const renderCocktails = (cocktails) => {
-  cocktails.forEach((cocktail) => {
+const renderCocktails = (cocktail) => {
     const cocktailMenu = document.querySelector("#cocktail-bar");
     const span = document.createElement("span");
-    span.innerText = drinks.strDrink;
+    span.innerText = cocktail.strDrink;
     cocktailMenu.appendChild(span);
-  });
+ 
 };
 
-//"https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=margarita"
+function dropDown() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+const init = () => {
+    fetchAll()
+}
+init();
