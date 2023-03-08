@@ -57,7 +57,7 @@ input[type="text"] {
   font-size: 3vh;
 }
 
-#image {
-  width: 200px;
-  height: 200px;
+img {
+  width: 50%; 
+  height: auto;
 }
