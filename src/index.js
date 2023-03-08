@@ -61,24 +61,21 @@ const renderDetails = (cocktail) => {
 };
 // goin to work on this tomorrow a lot harder then I rememebred and jsut getting over a panic attack
 // const reviewform = document.getElementById("review");
-const reviewForm = document.querySelector('#review-form');
-reviewForm.addEventListener("submit", (e) => {
+const form = document.querySelector('#review-form');
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(e);
-  const newReviewAndRating = (cocktail) => {
-    const rating = reviewForm.querySelector("#rating").value
-    const review = reviewForm.querySelector("#reviews").value
+//console.log(e);
+    const rating = document.querySelector("#rating").value
+    const review = document.querySelector("#reviews").value
+    //console.log(rating,review)
     const addRating = document.createElement("p")
-    addRating.textcontent = "Rating: " + " " +  rating
+    addRating.innerHTML = `Rating: ${rating} `
     const addReview = document.createElement("p")
-    addReview.textcontent = "Review: " + " " +  review
+    addReview.innerHTML = `Review: ${review}`
     cocktailInfo.appendChild(addRating)
     cocktailInfo.appendChild(addReview)
-  };
-
-  // console.log(newReviewAndRating);
-  // debugger
-});
+  });
+  
 
   
   
