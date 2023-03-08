@@ -3,6 +3,8 @@ const cocktailURL =
 
 const cocktailInfo = document.querySelector("#detailed-info");
 
+
+
 const fetchAll = () => {
   fetch(`${cocktailURL}`)
     .then((response) => response.json())
@@ -17,7 +19,7 @@ const fetchAll = () => {
 const renderCocktails = (cocktail) => {
   const cocktailMenu = document.querySelector("#cocktail-bar");
   const btn = document.createElement("button");
-  btn.innerText = cocktail.strDrink;
+  btn.innerText = cocktail.strDrink
   cocktailMenu.appendChild(btn);
   btn.addEventListener("click", (e) => renderDetails(cocktail))
   }
@@ -59,12 +61,13 @@ const renderDetails = (cocktail) => {
 // goin to work on this tomorrow a lot harder then I rememebred and jsut getting over a panic attack
 // const reviewform = document.getElementById("review");
 
-// reviewform.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   let review = document.getElementById("valuw");
-//   review.value = "";
-//   cocktailInfo.appendChild(review)
-// });
+const reviewForm = document.querySelector('#review-form');
+reviewForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    reviewForm.querySelector("#reviews").value
+    
+
+});
   
   
     // new code below

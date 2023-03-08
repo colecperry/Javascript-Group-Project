@@ -17,7 +17,7 @@ body {
 
 #character-bar {
   height: 15vh;
-  background: rgb(49, 109, 179);
+  background: rgb(146, 156, 166);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -58,6 +58,6 @@ input[type="text"] {
 }
 
 #image {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
 }

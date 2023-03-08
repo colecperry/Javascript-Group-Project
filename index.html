@@ -20,10 +20,13 @@
       </div>
 
     <div>
-      <h4>Add review: <span id="review"></span></h4>
+      <h4>Cocktail Reviews: <span id="add reviews"></span></h4>
       <form id="review-form">
-        <input type="text" placeholder="Add Review" id="votes" name="votes" />
-        <input type="submit" value="Add Review" />
+        <label for= "rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5">
+        <label for="review">Reviews:</label>
+        <input id="reviews" name="add-review" rows="5" cols="30" required> </textarea>
+        <input type="submit" value="Add Review"/>
       </form>
     </div>
 
