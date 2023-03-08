@@ -56,8 +56,18 @@ const renderDetails = (cocktail) => {
   recipe.innerText = "Instructions: " + cocktail.strInstructions 
   cocktailInfo.appendChild(recipe);
 };
+// goin to work on this tomorrow a lot harder then I rememebred and jsut getting over a panic attack
+// const reviewform = document.getElementById("review");
 
-
+// reviewform.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   let review = document.getElementById("valuw");
+//   review.value = "";
+//   cocktailInfo.appendChild(review)
+// });
+  
+  
+    // new code below
 //figure out how to not show null under ingredients for recipes that have more ingredients
 //take away ability to render mutiple cocktails under the detailed-info container
 //add event listener to review button and take value & append to detailed-info container
