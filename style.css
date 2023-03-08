@@ -2,10 +2,9 @@ html {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-html,
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .logo {
@@ -16,6 +15,7 @@ body {
 }
 
 #character-bar {
+  text-align: center;
   height: 15vh;
   background: rgb(146, 156, 166);
   display: flex;
@@ -58,6 +58,6 @@ input[type="text"] {
 }
 
 img {
-  width: 50%; 
+  width: 40%; 
   height: auto;
 }
