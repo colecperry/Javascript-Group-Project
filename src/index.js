@@ -57,17 +57,29 @@ const renderDetails = (cocktail) => {
   const recipe = document.createElement('p');
   recipe.innerText = "Instructions: " + cocktail.strInstructions 
   cocktailInfo.appendChild(recipe);
+
 };
 // goin to work on this tomorrow a lot harder then I rememebred and jsut getting over a panic attack
 // const reviewform = document.getElementById("review");
-
 const reviewForm = document.querySelector('#review-form');
 reviewForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    reviewForm.querySelector("#reviews").value
-    
+  e.preventDefault();
+  console.log(e);
+  const newReviewAndRating = (cocktail) => {
+    const rating = reviewForm.querySelector("#rating").value
+    const review = reviewForm.querySelector("#reviews").value
+    const addRating = document.createElement("p")
+    addRating.textcontent = "Rating: " + " " +  rating
+    const addReview = document.createElement("p")
+    addReview.textcontent = "Review: " + " " +  review
+    cocktailInfo.appendChild(addRating)
+    cocktailInfo.appendChild(addReview)
+  };
 
+  // console.log(newReviewAndRating);
+  // debugger
 });
+
   
   
     // new code below
@@ -79,9 +91,8 @@ reviewForm.addEventListener("submit", (e) => {
 
 
 
-
 const init = () => {
   fetchAll();
-
 };
+
 init();
