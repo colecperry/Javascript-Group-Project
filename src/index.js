@@ -1,9 +1,9 @@
-const cocktailURL =
-  "https://www.thecocktaildb.com/api/json/v2/9973533/latest.php";
+// ! GLOBAL VARIABLES
 
-const cocktailInfo = document.querySelector("#detailed-info");
-
-
+const cocktailURL = "https://www.thecocktaildb.com/api/json/v2/9973533/latest.php";
+const instructions = document.querySelector("#instructions");
+const ingredients = document.querySelector("#ingredients");
+const measures = document.querySelector("#Measure");
 
 const fetchAll = () => {
   fetch(`${cocktailURL}`)
@@ -11,85 +11,92 @@ const fetchAll = () => {
     .then((cocktails) => {
       const cocktails1 = cocktails.drinks;
       cocktails1.forEach((cocktail) => {
-        renderCocktails(cocktail);
+          // newArr = objects inside cocktail
+          let newArr =  Object.keys(cocktail)
+          .filter((k) => cocktail[k] != null) // finding any value that == null
+          .reduce((a, k) => ({ ...a, [k]: cocktail[k] }), {}); // removing it from array
+          console.log(newArr)
+          renderCocktails(newArr);
       });
     });
 };
 
 const renderCocktails = (cocktail) => {
-  const cocktailMenu = document.querySelector("#cocktail-bar");
-  const btn = document.createElement("button");
-  btn.innerText = cocktail.strDrink
-  cocktailMenu.appendChild(btn);
-  btn.addEventListener("click", (e) => renderDetails(cocktail))
-  }
-
+    const cocktailMenu = document.querySelector("#cocktail-bar");
+    const span = document.createElement("span");
+    span.innerText = cocktail.strDrink;
+    span.addEventListener("click", (e) => {
+        renderDetails(cocktail);
+        dropDown(cocktail);
+        // Resetting ingredients and instructions after different
+        // drink is clicked
+        ingredients.textContent = null;
+        instructions.textContent = null;
+    });
+    cocktailMenu.appendChild(span);
+};
 
 const renderDetails = (cocktail) => {
-  const cocktailImage = document.createElement("img");
-  cocktailImage.src = cocktail.strImageSource
-  cocktailImage.alt = cocktail.strDrink
-  cocktailInfo.appendChild(cocktailImage);
-  const cocktailName = document.querySelector("#name");
-  cocktailName.innerText = cocktail.strDrink;
-  cocktailInfo.appendChild(cocktailName);
-  const measureAndIngredient1 = document.createElement('p');
-  measureAndIngredient1.innerText = "- " + cocktail.strMeasure1 + " " + cocktail.strIngredient1
-  cocktailInfo.appendChild(measureAndIngredient1);
-  const measureAndIngredient2 = document.createElement('p');
-  measureAndIngredient2.innerText = "- " + cocktail.strMeasure2 + " " + cocktail.strIngredient2
-  cocktailInfo.appendChild(measureAndIngredient2);
-  const measureAndIngredient3 = document.createElement('p');
-  measureAndIngredient3.innerText = "- " + cocktail.strMeasure3 + " " + cocktail.strIngredient3
-  cocktailInfo.appendChild(measureAndIngredient3);
-  const measureAndIngredient4 = document.createElement('p');
-  measureAndIngredient4.innerText = "- " + cocktail.strMeasure4 + " " + cocktail.strIngredient4
-  cocktailInfo.appendChild(measureAndIngredient4);
-  const measureAndIngredient5 = document.createElement('p');
-  measureAndIngredient5.innerText = "- " + cocktail.strMeasure5 + " " + cocktail.strIngredient5
-  cocktailInfo.appendChild(measureAndIngredient5);
-  const measureAndIngredient6 = document.createElement('p');
-  measureAndIngredient6.innerText = "- " + cocktail.strMeasure6 + " " + cocktail.strIngredient6
-  cocktailInfo.appendChild(measureAndIngredient6);
-  const measureAndIngredient7 = document.createElement('p');
-  measureAndIngredient7.innerText = "- " + cocktail.strMeasure7 + " " + cocktail.strIngredient7
-  cocktailInfo.appendChild(measureAndIngredient7);
-  const recipe = document.createElement('p');
-  recipe.innerText = "Instructions: " + cocktail.strInstructions 
-  cocktailInfo.appendChild(recipe);
+    const image = document.querySelector("#image");
+    const name = document.querySelector("#name");
 
-};
-// goin to work on this tomorrow a lot harder then I rememebred and jsut getting over a panic attack
-// const reviewform = document.getElementById("review");
-const form = document.querySelector('#review-form');
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-//console.log(e);
-    const rating = document.querySelector("#rating").value
-    const review = document.querySelector("#reviews").value
-    //console.log(rating,review)
-    const addRating = document.createElement("p")
-    addRating.innerHTML = `Rating: ${rating} `
-    const addReview = document.createElement("p")
-    addReview.innerHTML = `Review: ${review}`
-    cocktailInfo.appendChild(addRating)
-    cocktailInfo.appendChild(addReview)
-  });
-  
+    image.src = cocktail.strDrinkThumb;
+    image.alt = cocktail.strDrink;
+    name.textContent = cocktail.strDrink;
+}
 
-  
-  
-    // new code below
-//figure out how to not show null under ingredients for recipes that have more ingredients
-//take away ability to render mutiple cocktails under the detailed-info container
-//add event listener to review button and take value & append to detailed-info container
-//add one more event listener
-//style and reformat with CSS
+function dropDown(cocktail) {
+    document.getElementById("button").addEventListener("click",(e) =>{
+        document.getElementById("myDropdown").classList.toggle("show")
+    })
+    document.getElementById("one").addEventListener("click", (e) => {
+        e.preventDefault();
+        renderIngredients(cocktail)
+    })
+    document.getElementById("two").addEventListener("click", (e) => {
+        e.preventDefault();
+        renderInstructions(cocktail);
+    })
+}
 
+const renderInstructions = (cocktail) => {
+    instructions.textContent = cocktail.strInstructions;
+}
 
+const renderIngredients = (cocktail) => {
 
+    let ing = Object.entries(cocktail)
+        // finding all of the ingredient values
+        .filter(([j]) => j.startsWith("strIngredient"))
+        .map(([,k]) => k); // adding it to the ing array
+    let measure = Object.entries(cocktail)
+    // finding all the measurement values
+    .filter(([j]) => j.startsWith("strMeasure"))
+    .map(([,k]) => k); // adding it to the measure array
+    for(i = 0; i< measure.length; i++){ //removing all measure values that have ""
+        if(measure[i] === null){
+            measure.pop()
+        }
+    }
+    ingredients.textContent = null; // clearing ingredients
+    //combining the ingredients and measure values together
+    for(i=0;i<ing.length;i++){
+        const li = document.createElement("p")
+        li.textContent = ing[i] + " - " + measure[i]
+        ingredients.append(li)
+    }
+}
 const init = () => {
-  fetchAll();
-};
-
+    fetchAll();
+    //creating form response and rendering it onto the page
+    const form = document.querySelector('#review-form');
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const review = document.querySelector("#reviews").value
+        const addReview = document.createElement("p")
+        addReview.innerHTML = `Review: ${review}`
+        instructions.appendChild(addReview)
+        e.target.reset()
+    });
+}
 init();

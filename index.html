@@ -9,29 +9,39 @@
       <h1>Top 10 Cocktails</h1>
     </div>
 
-    <div id="cocktail-bar">
-      <!-- show cocktail names here -->
-    </div>
-
+    <nav id="nav">
+      <div id="cocktail-bar" class="content">
+        <!-- show cocktail names here -->
+      </div>
+    </nav>
     <div class="cocktailInfo">
       <div id="detailed-info">
-        <p id="name">Cocktail's Name</p>
-        <!-- display cocktail name, image, instructions, and ingredients here -->
+        <p id="name">Pick a drink!</p>
+        <img
+          id="image"
+          src="assets/dummy.gif"
+        />
       </div>
-
-    <div>
-      <h4>Cocktail Reviews: <span id="add-reviews"></span></h4>
-      <form id="review-form">
-        <label for= "rating">Rating:</label>
-        <input type="number" id="rating" name="rating" min="1" max="5">
-        <label for="review">Reviews:</label>
-        <input id="reviews" name="add-review" rows="5" cols="30" required> </textarea>
-        <input type="submit" value="Add Review"/>
-      </form>
+      <div id="info1">
+        <div class="dropdown">
+          <button id="button" onclick="dropDown()" class="dropbtn">Cocktail Info</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a id= "one" href="#">Ingredients</a>
+            <a id="two" href="#">Instructions</a>
+          </div>
+        </div>
+        <div id="info">
+          <p id="ingredients"></p>
+          <p id="instructions"></p>
+        </div>
+      </div>
+        <h4>Add review: <span id="review"></span></h4>
+        <form id="review-form">
+          <input type="text" placeholder="Add Review" id="reviews" name="votes" />
+          <input type="submit" value="Add Review" />
+        </form>
+      </div>
     </div>
     <script src="src/index.js"></script>
-    <footer>
-      <p>Copyright © 2023 - Top 10 Cocktails</p>
-    </footer>
   </body>
 </html>
